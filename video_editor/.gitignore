@@ -2,3 +2,7 @@
 __pycache__/
 *.pyc
 output/
+.playwright/
+.env
+.DS_Store
+input/videos/

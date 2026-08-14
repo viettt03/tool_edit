@@ -41,11 +41,11 @@ class VideoConfig:
     # AUDIO
     # =========================
 
-    audio_speed: float = 1.0
+    audio_speed: float = 1.3
 
-    narration_volume: float = 1.0
+    narration_volume: float = 1.5
 
-    music_volume: float = 0.15
+    music_volume: float = 0.5
 
     # =========================
     # VIDEO

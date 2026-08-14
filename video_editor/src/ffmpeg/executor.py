@@ -1,6 +1,22 @@
 import json
+import os
+import shutil
 import subprocess
 from pathlib import Path
+
+
+def ffmpeg_binary() -> str:
+    """Prefer the Homebrew full build, which includes libass subtitles."""
+
+    configured = os.environ.get("FFMPEG_BINARY")
+    if configured:
+        return configured
+
+    full_build = Path("/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg")
+    if full_build.is_file():
+        return str(full_build)
+
+    return shutil.which("ffmpeg") or "ffmpeg"
 
 
 def run_command(

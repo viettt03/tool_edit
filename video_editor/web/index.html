@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Cliproom · Douyin ingest</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Điều hướng chính">
+        <a class="brand" href="/" aria-label="Cliproom home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M8 8.5h7.7L24 16l-8.3 7.5H8l8.2-7.5L8 8.5Z" fill="currentColor" />
+              <path d="M8 8.5h7.7L24 16l-8.3 7.5H8l8.2-7.5L8 8.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span>Cliproom</span>
+        </a>
+
+        <nav class="side-nav">
+          <a class="nav-item is-active" href="#top">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m3 9 7-6 7 6v7.2c0 .4-.3.8-.8.8H12v-5H8v5H3.8c-.5 0-.8-.4-.8-.8V9Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            Dashboard
+          </a>
+
+          <span class="nav-section-label">Ingest</span>
+          <a class="nav-item" href="#sourceInput">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8.2 11.8 11.8 8.2M6.1 14.9l-1 1a3 3 0 0 1-4.2-4.2l3.2-3.2a3 3 0 0 1 4.2 0M13.9 5.1l1-1a3 3 0 0 1 4.2 4.2l-3.2 3.2a3 3 0 0 1-4.2 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+            Nguồn vào
+          </a>
+          <a class="nav-item" href="#activityRunning">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2.5 10h3l1.7-5 3.2 10 1.8-5h5.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Hoạt động
+          </a>
+
+          <span class="nav-section-label">Thư viện</span>
+          <a class="nav-item" href="#library-title">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2.5 5.5c0-.8.7-1.5 1.5-1.5h4l1.4 1.7h6.6c.8 0 1.5.7 1.5 1.5v7.3c0 .8-.7 1.5-1.5 1.5H4c-.8 0-1.5-.7-1.5-1.5V5.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            Local library
+          </a>
+          <a class="nav-item" href="#library-title">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5" /><path d="m6.7 10 2.2 2.2 4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Đã xử lý
+          </a>
+
+          <span class="nav-section-label">Cài đặt</span>
+          <a class="nav-item" href="#browserSelect">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m10 2 1.2 1.8 2.2-.2.8 2.1 2 .9-.6 2.1 1.4 1.7-1.4 1.7.6 2.1-2 .9-.8 2.1-2.2-.2L10 18l-1.2-1.8-2.2.2-.8-2.1-2-.9.6-2.1L3 9.6l1.4-1.7-.6-2.1 2-.9.8-2.1 2.2.2L10 2Z" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" /><circle cx="10" cy="10" r="2.3" stroke="currentColor" stroke-width="1.35" /></svg>
+            Cài đặt
+          </a>
+          <a class="nav-item" href="#top">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="6.4" r="3" stroke="currentColor" stroke-width="1.5" /><path d="M3.5 17c.7-3 2.8-4.7 6.5-4.7s5.8 1.7 6.5 4.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+            Tài khoản
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span class="sidebar-footer-mark">↗</span>
+          <div><strong>Cliproom v1.0</strong><span>Douyin Ingest Studio</span></div>
+        </div>
+      </aside>
+
+      <div class="content-shell" id="top">
+        <header class="topbar">
+          <a class="brand topbar-brand" href="#top" aria-label="Cliproom home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none">
+                <path d="M8 8.5h7.7L24 16l-8.3 7.5H8l8.2-7.5L8 8.5Z" fill="currentColor" />
+                <path d="M8 8.5h7.7L24 16l-8.3 7.5H8l8.2-7.5L8 8.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span>Cliproom</span>
+          </a>
+          <div class="topbar-actions">
+            <span class="local-status"><span class="status-dot"></span> Local workspace</span>
+            <button class="ghost-button" id="openFolder" type="button">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2.8 5.7c0-.8.6-1.4 1.4-1.4h4l1.4 1.6h6.2c.8 0 1.4.6 1.4 1.4v6.8c0 .8-.6 1.4-1.4 1.4H4.2c-.8 0-1.4-.6-1.4-1.4V5.7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /><path d="M3.2 8.2h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" /></svg>
+              Mở thư mục
+            </button>
+            <span class="avatar" aria-label="Tài khoản hiện tại">D</span>
+          </div>
+        </header>
+
+        <main>
+          <section class="intro" aria-labelledby="page-title">
+            <div class="intro-copy-block">
+              <div class="eyebrow"><span></span> Douyin ingest studio</div>
+              <h1 id="page-title">Từ một đường link<br /><em>đến kho footage.</em></h1>
+              <p class="intro-copy">Dán link Douyin, chọn nguồn, rồi để Cliproom chuẩn bị video cho câu chuyện của bạn.</p>
+            </div>
+            <div class="intro-visual" aria-hidden="true">
+              <svg viewBox="0 0 420 180" fill="none">
+                <path d="M12 142c70-46 97-51 166-17 64 31 103 17 136-22 34-41 59-74 94-58" stroke="var(--line-strong)" stroke-width="1.2" stroke-dasharray="4 5" />
+                <path d="M33 111c45-35 77-66 129-66 58 0 63 39 114 44 53 5 70-47 125-55" stroke="var(--line)" stroke-width="1.2" />
+                <path d="M68 64 84 80 68 96" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <rect x="132" y="39" width="180" height="112" rx="10" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1.2" />
+                <circle cx="148" cy="53" r="3" fill="var(--line-strong)" /><circle cx="159" cy="53" r="3" fill="var(--line-strong)" /><circle cx="170" cy="53" r="3" fill="var(--line-strong)" />
+                <path d="M152 75h140M152 84h108M152 95h126" stroke="var(--line)" stroke-width="1.1" />
+                <path d="m216 106 18 11-18 11v-22Z" fill="var(--ink)" />
+                <path d="M151 134h137" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" /><circle cx="242" cy="134" r="4.5" fill="var(--ink)" />
+                <rect x="100" y="99" width="55" height="27" rx="13.5" fill="var(--surface)" stroke="var(--line-strong)" /><text x="117" y="116" fill="var(--ink-soft)" font-size="10" font-family="system-ui">URL</text>
+                <rect x="289" y="76" width="73" height="27" rx="13.5" fill="var(--surface)" stroke="var(--line-strong)" /><text x="305" y="93" fill="var(--ink-soft)" font-size="10" font-family="system-ui">SOURCE</text>
+                <rect x="304" y="122" width="79" height="27" rx="13.5" fill="var(--surface)" stroke="var(--line-strong)" /><text x="321" y="139" fill="var(--ink-soft)" font-size="10" font-family="system-ui">FOOTAGE</text>
+              </svg>
+            </div>
+          </section>
+
+          <section class="workspace-grid" aria-label="Tải video Douyin">
+            <div class="panel ingest-panel">
+              <div class="panel-heading">
+                <div><span class="panel-kicker"><b>01</b> Nguồn vào</span><h2>Bạn muốn lấy video từ đâu?</h2></div>
+              </div>
+
+              <div class="mode-switch" role="tablist" aria-label="Loại nguồn">
+                <button class="mode-button is-active" data-mode="video" role="tab" aria-selected="true" type="button"><span class="mode-icon">↗</span> Một video</button>
+                <button class="mode-button" data-mode="user" role="tab" aria-selected="false" type="button"><span class="mode-icon">♙</span> User</button>
+                <button class="mode-button" data-mode="keyword" role="tab" aria-selected="false" type="button"><span class="mode-icon">⌕</span> Từ khóa</button>
+              </div>
+
+              <form id="downloadForm" novalidate>
+                <label class="field-label" for="sourceInput" id="sourceLabel">Link video Douyin · mỗi dòng một link</label>
+                <div class="input-wrap"><span class="input-prefix" id="inputPrefix">URL</span><textarea id="sourceInput" name="source" rows="3" autocomplete="off" spellcheck="false" placeholder="https://www.douyin.com/video/...&#10;https://www.douyin.com/video/..." required></textarea><button class="clear-input" id="clearInput" type="button" aria-label="Xóa nội dung">×</button></div>
+                <p class="field-hint" id="fieldHint">Dán nhiều link, mỗi dòng một link. Có thể dùng cả link dạng <code>modal_id=...</code>.</p>
+
+                <div class="form-row">
+                  <div class="limit-field is-hidden" id="limitField"><label class="field-label" for="limitInput">Số video tối đa</label><div class="number-wrap"><input id="limitInput" type="number" min="1" max="100" value="10" /><span>video</span></div></div>
+                  <div class="browser-field"><label class="field-label" for="browserSelect">Phiên trình duyệt</label><div class="select-wrap"><select id="browserSelect"><option value="chrome">Chrome hiện tại</option><option value="safari">Safari</option></select><span class="select-chevron">⌄</span></div></div>
+                </div>
+                <button class="primary-button" id="downloadButton" type="submit"><span class="button-label">Tải video xuống</span><span class="button-arrow">↓</span></button>
+              </form>
+
+              <div class="privacy-note"><span class="note-icon">i</span><span>Chạy local trên máy bạn. Nếu Douyin yêu cầu xác minh, hãy mở Chrome và đăng nhập trước.</span></div>
+            </div>
+
+            <div class="panel activity-panel">
+              <div class="panel-heading activity-heading"><div><span class="panel-kicker"><b>02</b> Hoạt động</span><h2>Trạng thái tải</h2></div><span class="live-label"><span class="status-dot"></span> Live</span></div>
+              <div class="activity-empty" id="activityEmpty"><div class="empty-orbit"><span class="orbit-dot one"></span><span class="orbit-dot two"></span><span class="orbit-center">↓</span></div><h3>Chưa có lượt tải nào</h3><p>Link bạn nhập sẽ xuất hiện ở đây cùng tiến trình và kết quả.</p></div>
+              <div class="activity-running is-hidden" id="activityRunning"><div class="job-topline"><span class="job-status-chip" id="jobStatusChip">Đang chuẩn bị</span><span class="job-percent" id="jobPercent">0%</span></div><div class="progress-track"><span id="progressBar"></span></div><p class="job-message" id="jobMessage">Đang chuẩn bị tải...</p><div class="manual-verification is-hidden" id="manualVerification"><span class="manual-verification-icon">↗</span><div><strong>Hoàn tất xác minh trên Chrome</strong><p>Douyin đang yêu cầu kéo CAPTCHA. Xác minh xong rồi quay lại đây để tải lại.</p><button class="text-button" id="verificationButton" type="button">Mở lại trang Douyin</button></div></div><div class="job-items" id="jobItems"></div><div class="job-log" id="jobLog"></div></div>
+            </div>
+          </section>
+
+          <section class="publish-section" aria-labelledby="publish-title">
+            <div class="panel publish-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="panel-kicker"><b>03</b> TikTok upload</span>
+                  <h2 id="publish-title">Chuẩn bị video để đăng</h2>
+                </div>
+              </div>
+              <p class="publish-intro">Cliproom mở một Chrome thường với profile riêng. Bạn đăng nhập Gmail/TikTok và xử lý xác minh thủ công, sau đó app tự lấy <code>output/final.mp4</code>, điền caption và dừng trước nút Post.</p>
+
+              <div class="auto-upload-target">
+                <div class="auto-upload-icon">▶</div>
+                <div><strong>Video sẽ đăng</strong><span>output/final.mp4</span></div>
+                <span class="auto-upload-badge">TỰ ĐỘNG</span>
+              </div>
+              <div class="auto-upload-target caption-target">
+                <div class="auto-upload-icon">Aa</div>
+                <div><strong>Caption theo nội dung video</strong><span>Sau một vụ tai nạn, cô tỉnh dậy với chứng mất trí nhớ và gọi cho người đàn ông được lưu tên “ông xã”… #truyenngan #ngontinh</span></div>
+              </div>
+
+              <div class="publish-actions auto-publish-actions">
+                <button class="primary-button" id="tiktokOpenButton" type="button"><span class="button-label">Mở Chrome và tự upload</span><span class="button-arrow">→</span></button>
+              </div>
+
+              <div class="privacy-note"><span class="note-icon">i</span><span>Profile TikTok được lưu riêng trong project. Bạn tự đăng nhập và tự xử lý xác minh trên cửa sổ Chrome, sau đó Cliproom tự tiếp tục.</span></div>
+            </div>
+
+            <div class="panel publish-status-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="panel-kicker"><b>04</b> Post handoff</span>
+                  <h2>Luồng xác nhận</h2>
+                </div>
+                <span class="live-label"><span class="status-dot" id="tiktokStatusDot"></span> Local</span>
+              </div>
+
+              <div class="publish-steps" aria-label="Các bước đăng TikTok">
+                <div class="publish-step is-current" id="tiktokStepLogin"><span class="publish-step-number">1</span><div><strong>Chrome thường + đăng nhập</strong><p>Đăng nhập Gmail/TikTok và xử lý 2FA/CAPTCHA trên Chrome.</p></div></div>
+                <div class="publish-step" id="tiktokStepUpload"><span class="publish-step-number">2</span><div><strong>Cliproom tự upload</strong><p>Tự lấy video cuối và điền caption vào màn hình TikTok.</p></div></div>
+                <div class="publish-step" id="tiktokStepPost"><span class="publish-step-number">3</span><div><strong>Bạn bấm Post</strong><p>Kiểm tra lần cuối rồi tự xác nhận đăng video.</p></div></div>
+              </div>
+
+              <div class="publish-state" id="tiktokState" role="status" aria-live="polite">
+                <span class="publish-state-icon">1</span>
+                <div><strong>Chưa mở Chrome</strong><p>Bấm “Mở Chrome và tự upload” để bắt đầu.</p></div>
+              </div>
+              <button class="text-button close-tiktok-button" id="tiktokCloseButton" type="button">Đóng cửa sổ TikTok</button>
+            </div>
+          </section>
+
+          <section class="library-section" aria-labelledby="library-title"><div class="library-heading"><div><span class="panel-kicker"><b>05</b> Local library</span><h2 id="library-title">Video đã sẵn sàng</h2></div><button class="refresh-button" id="refreshLibrary" type="button">Làm mới <span>↻</span></button></div><div class="library-list" id="libraryList"><div class="library-loading">Đang đọc thư mục video...</div></div></section>
+        </main>
+
+        <footer class="footer"><span>Cliproom v1.0</span><span>Chuẩn bị cho pipeline dựng video tiếng Việt</span></footer>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

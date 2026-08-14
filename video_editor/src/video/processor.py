@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from ..ffmpeg.executor import run_command
+from ..ffmpeg.executor import ffmpeg_binary, run_command
 
 
 def build_filter(
@@ -71,7 +71,7 @@ def render_video_sequence(
     )
 
     command = [
-        "ffmpeg",
+        ffmpeg_binary(),
         "-y",
         *inputs,
 
