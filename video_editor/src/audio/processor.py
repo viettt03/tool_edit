@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from ..ffmpeg.executor import (
+    ffmpeg_binary,
     get_duration,
     run_command,
 )
@@ -45,7 +46,7 @@ def prepare_narration(
     filters.append(f"atempo={remaining}")
 
     command = [
-        "ffmpeg",
+        ffmpeg_binary(),
         "-y",
         "-i",
         str(input_file),
@@ -107,7 +108,7 @@ def prepare_narration_segment(
         filters.append(f"atempo={remaining}")
 
     command = [
-        "ffmpeg",
+        ffmpeg_binary(),
         "-y",
         "-ss",
         f"{start_seconds:.3f}",

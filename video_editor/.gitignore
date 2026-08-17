@@ -1,5 +1,12 @@
 .venv/
 __pycache__/
 *.pyc
+
+.env
+.DS_Store
+.playwright/
+
 output/
-input/
+input/videos/
+input/narration*
+input/music*

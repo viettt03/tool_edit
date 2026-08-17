@@ -23,6 +23,22 @@ def format_ass_timestamp(seconds: float) -> str:
     )
 
 
+def format_srt_timestamp(seconds: float) -> str:
+    total_milliseconds = int(seconds * 1000)
+
+    hours = total_milliseconds // 3600000
+    minutes = (total_milliseconds % 3600000) // 60000
+    secs = (total_milliseconds % 60000) // 1000
+    milliseconds = total_milliseconds % 1000
+
+    return (
+        f"{hours:02d}:"
+        f"{minutes:02d}:"
+        f"{secs:02d},"
+        f"{milliseconds:03d}"
+    )
+
+
 def split_short_text(
     text: str,
     max_words: int = 15,
@@ -31,6 +47,59 @@ def split_short_text(
         raise ValueError("subtitle_max_words must be at least 1.")
     words = text.strip().split()
     return [" ".join(words[index:index + max_words]) for index in range(0, len(words), max_words)]
+
+
+def split_text_by_chars(text: str, max_chars: int = 42) -> list[str]:
+    if max_chars < 1:
+        raise ValueError("max_chars must be at least 1.")
+
+    chunks: list[str] = []
+    current: list[str] = []
+    current_length = 0
+
+    for word in text.strip().split():
+        next_length = len(word) if not current else current_length + 1 + len(word)
+        if current and next_length > max_chars:
+            chunks.append(" ".join(current))
+            current = [word]
+            current_length = len(word)
+        else:
+            current.append(word)
+            current_length = next_length
+
+    if current:
+        chunks.append(" ".join(current))
+
+    return chunks
+
+
+def write_srt(
+    segments: list[SubtitleSegment],
+    output: Path,
+    max_chars: int = 42,
+) -> None:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    index = 1
+
+    with output.open("w", encoding="utf-8") as file:
+        for segment in segments:
+            chunks = split_text_by_chars(segment.text, max_chars=max_chars)
+            if not chunks:
+                continue
+
+            duration = segment.end - segment.start
+            chunk_duration = duration / len(chunks)
+
+            for chunk_index, chunk in enumerate(chunks):
+                start = segment.start + chunk_index * chunk_duration
+                end = segment.start + (chunk_index + 1) * chunk_duration
+                file.write(f"{index}\n")
+                file.write(
+                    f"{format_srt_timestamp(start)} --> "
+                    f"{format_srt_timestamp(end)}\n"
+                )
+                file.write(f"{chunk}\n\n")
+                index += 1
 
 
 def write_ass(
