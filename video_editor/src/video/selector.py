@@ -22,10 +22,9 @@ def select_videos(
         random.shuffle(pool)
 
     selected = []
-
     total_duration = 0.0
-
     index = 0
+    duration_cache: dict[Path, float] = {}
 
     while total_duration < target_duration:
 
@@ -40,9 +39,12 @@ def select_videos(
             index += 1
             continue
 
-        duration = get_video_duration(
-            video
-        )
+        duration = duration_cache.get(video)
+        if duration is None:
+            duration = get_video_duration(video)
+            if duration <= 0:
+                raise ValueError(f"Video has no usable duration: {video}")
+            duration_cache[video] = duration
 
         selected.append(video)
 
