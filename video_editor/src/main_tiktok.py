@@ -3,8 +3,6 @@ from pathlib import Path
 from .audio.processor import prepare_narration_segment
 from .config import VideoConfig
 from .renderer.renderer import render_final_video
-from .subtitle.srt import write_ass
-from .subtitle.whisper import VietnameseWhisper
 from .video.scanner import scan_videos
 from .video.selector import select_videos
 
@@ -52,26 +50,7 @@ def main() -> None:
     print(f"TikTok audio duration: {duration / 60:.2f} minutes")
 
     print("\n========================================")
-    print("2. SPEECH TO TEXT")
-    print("========================================")
-    whisper = VietnameseWhisper(
-        model_name=config.whisper_model,
-        device=config.whisper_device,
-        compute_type=config.whisper_compute_type,
-        language=config.language,
-        beam_size=config.whisper_beam_size,
-    )
-    segments = whisper.transcribe(narration_audio)
-    write_ass(
-        segments=segments,
-        output=config.subtitle_file,
-        width=width,
-        height=height,
-        max_words=config.subtitle_max_words,
-    )
-
-    print("\n========================================")
-    print("3. SELECTING VERTICAL VIDEOS")
+    print("2. SELECTING VERTICAL VIDEOS")
     print("========================================")
     videos = scan_videos(config.video_directory)
     print(f"Found {len(videos)} videos")
@@ -84,13 +63,13 @@ def main() -> None:
     print(f"Selected {len(selected)} clips")
 
     print("\n========================================")
-    print("4. RENDERING TIKTOK VIDEO")
+    print("3. RENDERING TIKTOK VIDEO")
     print("========================================")
     render_final_video(
         videos=selected,
         narration=narration_audio,
         music=config.background_music,
-        subtitles=config.subtitle_file,
+        subtitles=None,
         output=config.final_video,
         width=width,
         height=height,
@@ -104,6 +83,7 @@ def main() -> None:
         crf=config.crf,
         preset=config.preset,
         threads=config.threads,
+        logo=config.logo_file if config.logo_file and config.logo_file.exists() else None,
     )
 
     print("\n========================================")

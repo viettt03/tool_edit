@@ -58,6 +58,14 @@ def main() -> None:
         width=width,
         height=height,
         max_words=config.subtitle_max_words,
+        primary_colour="&H0030E6FF",
+        secondary_colour="&H0030E6FF",
+        outline_colour="&H002A6A25",
+        back_colour="&H00000000",
+        bold=1,
+        border_style=1,
+        outline=10,
+        shadow=1,
     )
 
     print("\n========================================")
@@ -94,6 +102,13 @@ def main() -> None:
         crf=config.crf,
         preset=config.preset,
         threads=config.threads,
+        logo=config.logo_file if config.logo_file and config.logo_file.exists() else None,
+        blur_side_background=config.blur_side_background,
+        blur_side_width_ratio=config.blur_side_width_ratio,
+        subtitle_blur_background=config.subtitle_blur_background,
+        subtitle_blur_width_ratio=config.subtitle_blur_width_ratio,
+        subtitle_blur_height_ratio=config.subtitle_blur_height_ratio,
+        subtitle_blur_bottom_margin_ratio=config.subtitle_blur_bottom_margin_ratio,
     )
 
     print("\n========================================")
